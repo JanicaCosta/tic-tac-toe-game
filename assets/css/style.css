@@ -31,9 +31,10 @@ body {
     grid-template-columns: repeat(3, auto) ;
     background: linear-gradient( 
         90deg,
-        rgb(210, 210, 221) 0%,
+        rgb(210, 210, 221) 60%,
         rgb(124, 124, 235) 100% );
     margin: 0 auto;
+    border-radius: 20px;
 }
 
 .cell {
@@ -84,7 +85,7 @@ body {
 
 .btn--gray {
     margin-top: 25px;
-    background-color: #468fd3;
+    background-color:  rgb(124, 124, 235);
     border: 5px transparent;
     border-radius: 5px;
     width: 100px;
