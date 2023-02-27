@@ -1,5 +1,7 @@
 const cells = document.querySelectorAll(".cell");
 
+let checkTurn = true ;
+
 /** defining players */
 
 let player_X = "X";
@@ -11,7 +13,13 @@ document.addEventListener("click", myfunction);
 
 function myfunction(event){
         if(event.target.matches(".cell")){
-            console.log(event.target.id);
+            play(event.target.id);
     }
 };
 
+function play(id) {
+    let cell = document.getElementById(id);
+    turn = checkTurn ? player_X : player_O;
+    cell.textContent = turn;
+    checkTurn = !checkTurn;
+}
