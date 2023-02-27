@@ -21,7 +21,7 @@ body {
 
 .board {
     display: grid;
-    width: 80%;
+    width: 500px;
     height: 500px;
     display: grid;
     justify-content: center;
@@ -35,6 +35,7 @@ body {
         rgb(124, 124, 235) 100% );
     margin: 0 auto;
     border-radius: 20px;
+    font-size: 75px;
 }
 
 .cell {
