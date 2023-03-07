@@ -2,7 +2,7 @@ const cells = document.querySelectorAll(".cell");
 
 let checkTurn = true ;
 
-let combinations = [
+const combinations = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -15,44 +15,39 @@ let combinations = [
 
 /** defining players */
 
-let player_X = "X";
-let player_O = "O";
+let playerX = "X";
+let playerO = "O";
 
 /** defining event when clicking in the space to show either X or O */
 
-document.addEventListener("click", myfunction);
+cells.forEach(function (cell) {
+  cell.addEventListener("click", function cellClickCheck(event) {
+    cellClickedCallback(this);
+  })
+})
 
-function myfunction(event){
-        if(event.target.matches(".cell")){
-            startGame(event.target.id);
-    }
-};
-
-function startGame(id) {
-    let cell = document.getElementById(id);
-    turn = checkTurn ? player_X : player_O;
+function cellClickedCallback(cell) {
+    turn = checkTurn ? playerX : playerO;
     cell.textContent = turn;
     checkTurn = !checkTurn;
+    // 'X' or 'O' are being added to check the winner not for styling purposes
     cell.classList.add(turn);
-    checkWiner(turn);
-    checkWiner(turn);
+    checkWinner(turn);
 
 }
 
-function checkWiner(turn) {
-    const winer = combinations.some((comb) => {
+function checkWinner(turn) {
+    const winner = combinations.some((comb) => {
         return comb.every((index) => {
           return cells[index].classList.contains(turn);
         });
       });
     
-      if (winer) {
+      if (winner) {
         gameCompleted(turn);
       } else if (checkDraw()) {
         gameCompleted();
-      } else {
-        checkTurn = !checkTurn;
-      }
+      } 
     }
 
 
@@ -61,11 +56,11 @@ function checkDraw(){
   let o = 0;
   for (index in cells) {
     if (!isNaN(index)) {
-      if (cells[index].classList.contains(player_X)) {
+      if (cells[index].classList.contains(playerX)) {
         x++;
       }
 
-      if (cells[index].classList.contains(player_O)) {
+      if (cells[index].classList.contains(playerO)) {
         o++;
       }
     }
@@ -73,19 +68,18 @@ function checkDraw(){
   return x + o === 9 ? true : false;
 }
 
-function gameCompleted(winer = null){
+function gameCompleted(winner = null){
   endOfGame = true;
   const result = document.getElementById("result");
   const h2 = document.createElement("h2");
   const h3 = document.createElement("h3");
-  let mesage = null;
 
   result.style.display = "block";
   result.appendChild(h2);
   result.appendChild(h3);
 
-  if (winer) {
-    h3.innerHTML =` Player <span>${winer}</span> won`; ;
+  if (winner) {
+    h3.innerHTML =` Player <span>${winner}</span> won`; ;
     } else {
       h2.innerHTML = " draw";
     }
